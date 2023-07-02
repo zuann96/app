@@ -248,14 +248,13 @@ CREATE TABLE `app_db`.`MEDICINES` (`ID` INT NOT NULL AUTO_INCREMENT , `NAME` VAR
 ALTER TABLE `app_db`.`MEDICINES` ADD UNIQUE `ID_INDEX` (`ID`);
 
 #read users
-CREATE USER 'reader'@'localhost' IDENTIFIED BY 'reader';
-GRANT SELECT ON app_db.* TO 'reader'@'localhost';
+CREATE USER 'reader'@'%' IDENTIFIED BY 'reader';
+GRANT SELECT ON app_db.* TO 'reader'@'%';
 FLUSH PRIVILEGES;
 
-
 #insert users
-CREATE USER 'updater'@'localhost' IDENTIFIED BY 'updater';
-GRANT INSERT, UPDATE ON app_db.* TO 'updater'@'localhost';
+CREATE USER 'updater'@'%' IDENTIFIED BY 'updater';
+GRANT INSERT, UPDATE ON app_db.* TO 'updater'@'%';
 FLUSH PRIVILEGES;
 
 

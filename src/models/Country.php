@@ -46,54 +46,33 @@ class Country {
         $this->iso = $iso;
     }
     
-    public static function getCountry(int $countryId) {
-        
+    public static function getCountry(int $countryId) {        
         try{
-
-            echo "<pre>";
-
             $env_variables =  \database\DatabaseConfig::getResourcesReader();
-
-            // $env_variables["username"] = $env_variables["passwd"] = "root";
-            var_dump($env_variables);
-
             $conn = new \mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
-            
-            if ($conn->connect_errno) {
+            if (!$conn->connect_errno) {
+                $query = "SELECT * FROM app_db.COUNTRIES WHERE ID = ? LIMIT 1";
+                $stmt = $conn->prepare($query);
+                if ($stmt !== false) {
+                    $stmt->bind_param("i", $countryId);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();                       
+                        return new Country($row['ID'], $row['NAME'],$row['ISO']);
+                    } else return false;
+                }else{
+                    echo" Error en la consulta: " . $conn->error;
+                    return false;
+                }
+
+            }else {
                 echo "Error de conexión a la base de datos: " . $conn->connect_error;
                 return false;
-            }
-
-            // Preparar la consulta con parámetros
-            $query = "SELECT * FROM app_db.COUNTRIES WHERE ID = ? LIMIT 1";
-            $stmt = $conn->prepare($query);
-
-            if ($stmt === false) {
-                echo" Error en la consulta: " . $conn->error;
-                return false;
-            }
-            $stmt->bind_param("i", $countryId);
-            $stmt->execute();
-            $result = $stmt->get_result();
-            if ($result->num_rows > 0) {
-                $row = $result->fetch_assoc();                       
-                return new Country($row['ID'], $row['NAME'],$row['ISO']);
-            } else return null;
-                   
+            }                   
         }catch(Exception $e) {
             echo "Error: " . $e->getMessage();
             return false;
-        }
-
-        
-
-       
-
-
-    
-    
-       
-
-        
+        }        
     }
 }

@@ -62,16 +62,16 @@ class Country {
                         return new Country($row['ID'], $row['NAME'],$row['ISO']);
                     } else return false;
                 }else{
-                    echo" Error en la consulta: " . $conn->error;
+                    echo  __METHOD__ . " error en la consulta: " . $conn->error;
                     return false;
                 }
 
             }else {
-                echo "Error de conexión a la base de datos: " . $conn->connect_error;
+                echo  __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error;
                 return false;
             }                   
         }catch(Exception $e) {
-            echo "Error: " . $e->getMessage();
+            echo  __METHOD__ . " error: " . $e->getMessage();
             return false;
         }        
     }

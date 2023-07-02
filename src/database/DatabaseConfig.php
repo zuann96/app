@@ -25,7 +25,7 @@ class DatabaseConfig {
     
         $host = getenv("MYSQL_HOST");
         $username = getenv("UPDATER_USER");
-        $passwd = getenv("READER_PASSWORD");
+        $passwd = getenv("UPDATER_PASSWORD");
         $dbname = getenv("MYSQL_DATABASE");
     
         $variablesEnv = [

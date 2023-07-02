@@ -7,6 +7,12 @@ services:
       - ./src:/var/www/html
     ports:
       - 9000:80
+    environment:
+      MYSQL_HOST: localhost
+      MYSQL_DATABASE: mysql_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
 
   mysql_db:
     image: mysql:latest

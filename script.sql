@@ -252,6 +252,7 @@ CREATE USER 'reader'@'localhost' IDENTIFIED BY 'reader';
 GRANT SELECT ON app_db.* TO 'reader'@'localhost';
 FLUSH PRIVILEGES;
 
+
 #insert users
 CREATE USER 'updater'@'localhost' IDENTIFIED BY 'updater';
 GRANT INSERT, UPDATE ON app_db.* TO 'updater'@'localhost';

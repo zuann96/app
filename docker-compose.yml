@@ -24,6 +24,8 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./script.sql:/docker-entrypoint-initdb.d/script.sql
 
   phpmyadmin:
     image: phpmyadmin:latest

@@ -1,26 +1,29 @@
 <?php
 
-// use Country;
-// use database\DatabaseConfig;
+$migrationFile = "database" . DIRECTORY_SEPARATOR . "migration" . DIRECTORY_SEPARATOR . "migrationScript.php";
+
+
+require($migrationFile);
+
+
+
+
+
 
 // require_once 'models/Country.php';
 // require_once 'database/DatabaseConfig.php';
 
 // $country = new Country();
 
-require_once 'models/Country.php';
+// require_once 'models/Patient.php';
 
 
-use models\Country;
+// use models\Patient;
 
-$countries = [];
-$countries[] = Country::getCountry(1);
-$countries[] = Country::getCountry(2);
-$countries[] = Country::getCountry(3);
-
-var_dump($countries);
-
-echo "<pre>";
+// $code = "asdasd14567";
+// $patient = new Patient($code);
+// $patient->insertPatient($patient);
+// echo "<pre>";
 
 
 

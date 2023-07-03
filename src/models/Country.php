@@ -1,8 +1,13 @@
 <?php
 namespace models;
 
-require_once __DIR__ . '/../database/DatabaseConfig.php';
-// use database\DatabaseConfig;
+require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
+require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
+
+use utils\Logger;
+use database\DatabaseConfig;
+use mysqli;
+
 
 class Country {
     private $id;
@@ -46,10 +51,10 @@ class Country {
         $this->iso = $iso;
     }
     
-    public static function getCountry(int $countryId) {        
+    public static function getCountryById(int $countryId) {        
         try{
-            $env_variables =  \database\DatabaseConfig::getResourcesReader();
-            $conn = new \mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+            $env_variables =  DatabaseConfig::getResourcesReader();
+            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
             if (!$conn->connect_errno) {
                 $query = "SELECT * FROM app_db.COUNTRIES WHERE ID = ? LIMIT 1";
                 $stmt = $conn->prepare($query);
@@ -62,16 +67,16 @@ class Country {
                         return new Country($row['ID'], $row['NAME'],$row['ISO']);
                     } else return false;
                 }else{
-                    echo  __METHOD__ . " error en la consulta: " . $conn->error;
+                    Logger::log(__METHOD__ . " error en la consulta: " . $conn->error);
                     return false;
                 }
 
             }else {
-                echo  __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error;
+                Logger::log( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);
                 return false;
             }                   
         }catch(Exception $e) {
-            echo  __METHOD__ . " error: " . $e->getMessage();
+            Logger::log(__METHOD__ . " error: " . $e->getMessage());
             return false;
         }        
     }

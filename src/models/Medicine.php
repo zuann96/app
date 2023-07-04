@@ -8,6 +8,7 @@ require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
 use utils\Logger;
 use database\DatabaseConfig;
 use mysqli;
+use Exception;
 
 class Medicine {
     private $id;
@@ -56,17 +57,14 @@ class Medicine {
                     $stmt->close();
     
                     return $count > 0;
-                } else {
-                    Logger::log(__METHOD__ . " error en la consulta: " . $conn->error);
-                    return false;
-                }
-            } else {
-                Logger::log(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
-                return false;
-            }
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+
         } catch (Exception $e) {
-            Logger::log(__METHOD__ . " error: " . $e->getMessage());
+            Logger::log($e->getMessage());
             return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
         }
     }
     
@@ -89,21 +87,50 @@ class Medicine {
                         $row = $result->fetch_assoc();
                         return new Medicine($row['ID'], $row['NAME']);
                     } else return false;
-                        
-                    
-                } else {
-                    Logger::log(__METHOD__ . " error en la consulta: " . $conn->error);
-                    return false;
-                }
-            } else {
-                Logger::log(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
-                return false;
-            }                   
-        } catch(Exception $e) {
-            Logger::log( __METHOD__ . " error: " . $e->getMessage());
+                                            
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);                
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
             return false;
-        }        
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }
     }
+
+    public static function getMedicineByName(string $name) {
+        try {
+            $env_variables = DatabaseConfig::getResourcesReader();
+            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+    
+            if (!$conn->connect_errno) {
+                $query = "SELECT * FROM app_db.MEDICINES WHERE NAME = ? LIMIT 1";
+                $stmt = $conn->prepare($query);
+    
+                if ($stmt !== false) {
+                    $stmt->bind_param("s", $name);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+    
+                    if ($result->num_rows > 0) {
+                        
+                        $row = $result->fetch_assoc();
+                        return new Medicine($row['NAME'],$row['ID']);
+
+                    } else throw new Exception(__METHOD__ . "medicine no encontrado: " . $conn->error);
+
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }
+    }
+    
 
     public static function insertMedicine(Medicine $medicine){   
         try {
@@ -124,21 +151,15 @@ class Medicine {
                         $medicine->id = $stmt->insert_id;
                         return true;
                         
-                    } else {
-                        Logger::log( __METHOD__ . " No se pudo insertar el paciente en la base de datos.");
-                        return false;
-                    }
-                } else {
-                    Logger::log( __METHOD__ . " error en la consulta ");
-                    return false;
-                }
-            } else {
-                Logger::log( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);
-                return false;
-            }
-        } catch(Exception $e) {
-            Logger::log( __METHOD__ . "error: " . $e->getMessage());
+                    } else throw new Exception( __METHOD__ . " No se pudo insertar el paciente en la base de datos.");
+                    
+                } else throw new Exception( __METHOD__ . " error en la consulta ");
+            } else throw new Exception( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
             return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
         }
     }
 }

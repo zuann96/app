@@ -7,18 +7,17 @@ require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
 use utils\Logger;
 use database\DatabaseConfig;
 use mysqli;
+use Exception;
 
 
 class Country {
     private $id;
     private $name;
-    private $iso;
 
     // Constructor
-    public function __construct(int $id, String $name, String $iso){
+    public function __construct(String $name, ?int $id = null){
         $this->id = $id;
         $this->name = $name;
-        $this->iso = $iso;
     }
 
     // Getter para ID
@@ -41,14 +40,32 @@ class Country {
         $this->name = $name;
     }
 
-    // Getter para ISO
-    public function getIso() {
-        return $this->iso;
-    }
-
-    // Setter para ISO
-    public function setIso(String $iso) {
-        $this->iso = $iso;
+    public static function isCountryExistsByName(string $countryName): bool {
+        try {
+            $env_variables = DatabaseConfig::getResourcesReader();
+            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+    
+            if (!$conn->connect_errno) {
+                $query = "SELECT COUNT(*) FROM app_db.COUNTRIES WHERE NAME = ? LIMIT 1";
+                $stmt = $conn->prepare($query);
+    
+                if ($stmt !== false) {
+                    $stmt->bind_param("s", $countryName);
+                    $stmt->execute();
+                    $stmt->bind_result($count);
+                    $stmt->fetch();
+                    $stmt->close();
+    
+                    return $count > 0;
+                    
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }
     }
     
     public static function getCountryById(int $countryId) {        
@@ -58,26 +75,85 @@ class Country {
             if (!$conn->connect_errno) {
                 $query = "SELECT * FROM app_db.COUNTRIES WHERE ID = ? LIMIT 1";
                 $stmt = $conn->prepare($query);
+                
                 if ($stmt !== false) {
                     $stmt->bind_param("i", $countryId);
                     $stmt->execute();
                     $result = $stmt->get_result();
+                   
                     if ($result->num_rows > 0) {
                         $row = $result->fetch_assoc();                       
-                        return new Country($row['ID'], $row['NAME'],$row['ISO']);
-                    } else return false;
-                }else{
-                    Logger::log(__METHOD__ . " error en la consulta: " . $conn->error);
-                    return false;
-                }
+                        return new Country($row['ID'], $row['NAME']);
+                    } else throw new Exception(__METHOD__ . " pais no encontrado ");
 
-            }else {
-                Logger::log( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);
-                return false;
-            }                   
-        }catch(Exception $e) {
-            Logger::log(__METHOD__ . " error: " . $e->getMessage());
+                }else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            }else throw new Exception( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);  
+        }catch (Exception $e) {
+            Logger::log($e->getMessage());
             return false;
-        }        
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }      
+    }
+
+    public static function getCountryByName(string $name) {
+        try {
+            $env_variables = DatabaseConfig::getResourcesReader();
+            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+            
+            if (!$conn->connect_errno) {
+                $query = "SELECT * FROM app_db.COUNTRIES WHERE NAME = ? LIMIT 1";
+                $stmt = $conn->prepare($query);
+                
+                if ($stmt !== false) {
+                    $stmt->bind_param("s", $name);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    
+                    if ($result->num_rows > 0) {
+                        $row = $result->fetch_assoc();
+                        return new Country($row['NAME'], $row['ID']);
+                    } else throw new Exception(__METHOD__ . " pais no encontrado: ");
+
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }
+    }
+
+
+    public static function insertCountry(Country $country){   
+        try {
+
+            $env_variables = DatabaseConfig::getResourcesUpdater();
+            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+    
+            if (!$conn->connect_errno) {
+                $query = "INSERT INTO app_db.COUNTRIES (NAME) VALUES (?)";
+                $stmt = $conn->prepare($query);
+    
+                if ($stmt !== false) {
+                    $stmt->bind_param("s", $country->name);
+                    $stmt->execute();
+                    $affectedRows = $stmt->affected_rows;
+                    
+                    if ($affectedRows > 0) {
+                        $country->id = $stmt->insert_id;
+                        return true;
+                        
+                    } else throw new Exception( __METHOD__ . " No se pudo insertar el paciente en la base de datos.");
+
+                } else throw new Exception( __METHOD__ . " error en la consulta ");
+            } else throw new Exception( __METHOD__ . "error de conexión a la base de datos: " . $conn->connect_error);
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        } finally{
+            if ($conn !== null) $conn->close(); 
+        }
     }
 }

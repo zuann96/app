@@ -82,8 +82,9 @@ class Price {
 
     public static function isPriceExists(int $country_id, int $year, int $medicine_id): bool {
         try {
-            $env_variables = DatabaseConfig::getResourcesReader();
-            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+        
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
 
             if (!$conn->connect_errno) {
                 $query = "SELECT COUNT(*) FROM app_db.PRICES WHERE COUNTRY_ID = ? AND YEAR = ? AND MEDICINE_ID = ? LIMIT 1";
@@ -102,17 +103,16 @@ class Price {
         } catch (Exception $e) {
             Logger::log($e->getMessage());
             return false;
-        }finally{
-            if ($conn !== null) $conn->close(); 
         }
     }
 
     public static function getPriceById(int $priceId) {
         try {
-            $env_variables = DatabaseConfig::getResourcesReader();
-            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
 
-            if (!$conn->connect_errno) {
+            
+                $conn = DatabaseConfig::getResourcesReader();
+                if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+           
                 $query = "SELECT * FROM app_db.PRICES WHERE ID = ? LIMIT 1";
                 $stmt = $conn->prepare($query);
 
@@ -127,20 +127,18 @@ class Price {
                     } else throw new Exception(__METHOD__ . " price no encontrado: ");
                         
                 } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
-            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
                                 
         } catch (Exception $e) {
             Logger::log($e->getMessage());
             return false;
-        } finally{
-            if ($conn !== null) $conn->close(); 
         }
     }
 
     public static function insertPrice(Price $price) {
         try {
-            $env_variables = DatabaseConfig::getResourcesUpdater();
-            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+        
+            $conn = DatabaseConfig::getResourcesUpdater();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
 
             if (!$conn->connect_errno) {
                 $query = "INSERT INTO app_db.PRICES (COUNTRY_ID, YEAR, MEDICINE_ID, PRICE) VALUES (?, ?, ?, ?)";
@@ -154,7 +152,7 @@ class Price {
                     if ($affectedRows > 0) {
                         $price->id = $stmt->insert_id;
                         return true;
-                    } else throw new Exception(__METHOD__ . " No se encontro el precio.");
+                    } else throw new Exception(__METHOD__ . " error precio no insertado.");
 
                 } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);                
             } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
@@ -162,60 +160,54 @@ class Price {
         } catch (Exception $e) {
             Logger::log($e->getMessage());
             return false;
-        } finally{
-            if ($conn !== null) $conn->close(); 
         }
     }
 
     public static function updatePrice(Price $price) {
         try {
-            $env_variables = DatabaseConfig::getResourcesUpdater();
-            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
+           
+            $conn = DatabaseConfig::getResourcesUpdater();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                    
+            $query = "UPDATE app_db.PRICES SET COUNTRY_ID = ?, YEAR = ?, MEDICINE_ID = ?, PRICE = ? WHERE ID = ?";
+            $stmt = $conn->prepare($query);
 
-            if (!$conn->connect_errno) {
-                $query = "UPDATE app_db.PRICES SET COUNTRY_ID = ?, YEAR = ?, MEDICINE_ID = ?, PRICE = ? WHERE ID = ?";
-                $stmt = $conn->prepare($query);
+            if ($stmt !== false) {
+                $stmt->bind_param("sissi", $price->country_id, $price->year, $price->medicine_id, $price->price, $price->id);
+                $stmt->execute();
+                $affectedRows = $stmt->affected_rows;
 
-                if ($stmt !== false) {
-                    $stmt->bind_param("sissi", $price->country_id, $price->year, $price->medicine_id, $price->price, $price->id);
-                    $stmt->execute();
-                    $affectedRows = $stmt->affected_rows;
+                return $affectedRows > 0;
+            } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
 
-                    return $affectedRows > 0;
-                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
 
-            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
         } catch (Exception $e) {
             Logger::log($e->getMessage());
             return false;
-        } finally{
-            if ($conn !== null) $conn->close(); 
         }
     }
 
     public static function deletePrice(Price $price) {
         try {
-            $env_variables = DatabaseConfig::getResourcesUpdater();
-            $conn = new mysqli($env_variables["dbname"], $env_variables["username"], $env_variables["passwd"]);
 
-            if (!$conn->connect_errno) {
-                $query = "DELETE FROM app_db.PRICES WHERE ID = ?";
-                $stmt = $conn->prepare($query);
+            $conn = DatabaseConfig::getResourcesUpdater();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
 
-                if ($stmt !== false) {
-                    $stmt->bind_param("i", $price->id);
-                    $stmt->execute();
-                    $affectedRows = $stmt->affected_rows;
+            $query = "DELETE FROM app_db.PRICES WHERE ID = ?";
+            $stmt = $conn->prepare($query);
 
-                    return $affectedRows > 0;
-                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
-                
-            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+            if ($stmt !== false) {
+                $stmt->bind_param("i", $price->id);
+                $stmt->execute();
+                $affectedRows = $stmt->affected_rows;
+
+                return $affectedRows > 0;
+            } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            
+
         } catch (Exception $e) {
             Logger::log($e->getMessage());
             return false;
-        } finally{
-            if ($conn !== null) $conn->close(); 
         }
     }
 }

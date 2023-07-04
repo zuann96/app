@@ -2,7 +2,12 @@
 
 namespace database;
 
+use mysqli;
+
 class DatabaseConfig { 
+
+    private static $conn_reader = null;
+    private static $conn_updater = null;
 
     public static function getResourcesReader() {
         $host = getenv("MYSQL_HOST");
@@ -17,7 +22,9 @@ class DatabaseConfig {
             'dbname' => $dbname
         ];
 
-        return $variablesEnv;
+        if(self::$conn_reader == null)self::$conn_reader = new mysqli($variablesEnv["dbname"], $variablesEnv["username"], $variablesEnv["passwd"]);
+
+        return self::$conn_reader;
 
     }
     
@@ -35,7 +42,9 @@ class DatabaseConfig {
             'dbname' => $dbname
         ];
 
-        return $variablesEnv;
+        if(self::$conn_updater == null)self::$conn_updater = new mysqli($variablesEnv["dbname"], $variablesEnv["username"], $variablesEnv["passwd"]);
+
+        return self::$conn_updater;
             
     }
 }

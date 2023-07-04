@@ -3,14 +3,16 @@
 require_once "models" . DIRECTORY_SEPARATOR . "Patient.php";
 require_once "models" . DIRECTORY_SEPARATOR . "Medicine.php";
 require_once "models" . DIRECTORY_SEPARATOR . "Country.php";
-require_once "models" . DIRECTORY_SEPARATOR. "Price.php";
-require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
+require_once "models" . DIRECTORY_SEPARATOR . "Price.php";
+require_once "models" . DIRECTORY_SEPARATOR . "Purchases.php";
+require_once "utils" . DIRECTORY_SEPARATOR . "Logger.php";
 
 
 use models\Patient;
 use models\Medicine;
 use models\Country;
 use models\Price;
+use models\Purchases;
 use utils\Logger;
 
 
@@ -39,7 +41,7 @@ try{
     $startTime = microtime(true);
     $csvNames = ["prices.csv","purchases.csv"];
 
-    $insertCounter = $errorCounter = 0;
+    $insertCounter = 0;
 
     foreach($csvNames as $fileName){
         $filePath = "database/migration/{$fileName}";
@@ -80,9 +82,11 @@ try{
                             break;
 
                         case 'Country':
+
                             if(Country::isCountryExistsByName($value))break;
                             $country = new Country($value);
                             $result = $country->insertCountry($country);
+                            
                             break;
                         
 
@@ -91,13 +95,14 @@ try{
                     if ($iteration === $totalElements) {
                         switch($fileName){
 
-                            case "purchases.csv":
-                    
-                                $combinedRow["Patient_id"];
-                                $combinedRow["Country"];
-                                $combinedRow["Medicine"];
-                                $combinedRow["Quantity"];
-                                $combinedRow["Purchase_date"];    
+                            case "purchases.csv":  
+
+                                $patient = Patient::getPatientByCode($combinedRow["Patient_id"]);
+                                $country = Country::getCountryByName($combinedRow["Country"]);
+                                $medicine = Medicine::getMedicineByName($combinedRow["Medicine"]);  
+                                $purchases = new Purchases($patient->getId(), $country->getId(), $medicine->getId(),$combinedRow["Quantity"],$combinedRow["Purchase_date"]);
+                                $result = $purchases->insertPurchase($purchases);    
+   
                                 break;
         
                             
@@ -116,7 +121,6 @@ try{
                     }
                     
                     if($result)$insertCounter++;
-                    else $errorCounter++;
                     
 
 
@@ -133,7 +137,7 @@ try{
     }
     $endTime = microtime(true);
     $totalTime = $endTime - $startTime;
-    Logger::log("Migración completada. Tiempo total: " . $totalTime . " segundos / insertados {$insertCounter} / errores {$errorCounter}");
+    Logger::log("Migración completada. Tiempo total: " . $totalTime . " segundos / insertados {$insertCounter} ");
 }catch(Exception $e) {
     Logger::log(__METHOD__ . " error migracion: " . $e->getMessage());
 }    

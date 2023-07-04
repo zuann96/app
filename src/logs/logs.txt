@@ -1,78 +1,13 @@
-[2023-07-04 21:08:13] Iniciando migración...
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:13] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] models\Price::insertPrice No se pudo insertar el precio en la base de datos.
-[2023-07-04 21:08:14] Migración completada. Tiempo total: 1.0969729423523 segundos / insertados 0 / errores 375
-[2023-07-04 21:08:59] Migración completada. Tiempo total: 46.620481014252 segundos / insertados 0 / errores 42375
+[2023-07-04 23:38:22] Iniciando migración...
+[2023-07-04 23:38:50] Iniciando migración...
+[2023-07-04 23:39:09] Iniciando migración...
+[2023-07-04 23:39:09] models\Country::insertCountry error en la consulta 
+[2023-07-04 23:39:09] models\Medicine::insertMedicine error en la consulta 
+[2023-07-04 23:39:18] Iniciando migración...
+[2023-07-04 23:39:18] models\Country::insertCountry error en la consulta 
+[2023-07-04 23:39:18] models\Medicine::insertMedicine error en la consulta 
+[2023-07-04 23:39:18] models\Country::getCountryByName pais no encontrado: 
+[2023-07-04 23:39:18] models\Medicine::getMedicineByNamemedicine no encontrado: 
+[2023-07-04 23:52:27] Iniciando migración...
+[2023-07-04 23:53:00] Iniciando migración...
+[2023-07-04 23:54:47] Migración completada. Tiempo total: 107.38025403023 segundos / insertados 14080 / errores 28295

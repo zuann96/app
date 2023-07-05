@@ -6,6 +6,7 @@ require_once "models" . DIRECTORY_SEPARATOR . "Country.php";
 require_once "models" . DIRECTORY_SEPARATOR . "Price.php";
 require_once "models" . DIRECTORY_SEPARATOR . "Purchases.php";
 require_once "utils" . DIRECTORY_SEPARATOR . "Logger.php";
+require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
 
 
 use models\Patient;
@@ -14,6 +15,7 @@ use models\Country;
 use models\Price;
 use models\Purchases;
 use utils\Logger;
+use database\DatabaseConfig;
 
 
 //MIGRACION PACIENTES
@@ -36,7 +38,27 @@ function csvToArray(string $filePath, string $delimiter = ','): array
     return ['header' => $header, 'data' => $data];
 }
 
-try{
+
+function createMigrationOkFile() {
+    $filename = 'migration_ok';
+
+    if (!file_exists($filename)) {
+        // Crea el archivo
+        $handle = fopen($filename, 'w');
+        fclose($handle);       
+    } 
+}
+
+function checkMigrationOkFile() {
+    $filename = 'migration_ok';
+
+    if (file_exists($filename))return true;
+    else return false;    
+    
+}
+
+
+function migrationScript($parameter){
     Logger::log("Iniciando migración...");
     $startTime = microtime(true);
     $csvNames = ["prices.csv","purchases.csv"];
@@ -102,7 +124,7 @@ try{
                                 $medicine = Medicine::getMedicineByName($combinedRow["Medicine"]);  
                                 $purchases = new Purchases($patient->getId(), $country->getId(), $medicine->getId(),$combinedRow["Quantity"],$combinedRow["Purchase_date"]);
                                 $result = $purchases->insertPurchase($purchases);    
-   
+
                                 break;
         
                             
@@ -121,23 +143,61 @@ try{
                     }
                     
                     if($result)$insertCounter++;
-                    
-
-
-
                 
                 }
                 
             }
         } else Logger::log("El encabezado y los datos no tienen la misma cantidad de columnas.");
         
-
-        
-
     }
+
     $endTime = microtime(true);
     $totalTime = $endTime - $startTime;
     Logger::log("Migración completada. Tiempo total: " . $totalTime . " segundos / insertados {$insertCounter} ");
+    if($parameter == "m")createMigrationOkFile();
+
+}
+
+
+try{
+
+    $parameter = "";
+    if(isset($argv[1]))$parameter = $argv[1];
+    
+
+    $itsConnected = false;
+    $maxTry = 10;
+    $counterTry = 0;
+    while(!$itsConnected){
+        $itsConnected = DatabaseConfig::establishDatabaseConnection();
+        $counterTry++;
+        sleep(5);
+        if($counterTry == $maxTry){
+            Logger::log("Imposible connectar con la base de datos");
+            exit();
+        }else Logger::log("Intento {$counterTry} / {$maxTry} ");
+        
+    }
+
+
+    //Primera y unica ejecucion migracion
+    switch($parameter){
+
+        case "m":
+
+            if(checkMigrationOkFile())Logger::log("Migracion completada anteriormente..");
+            else migrationScript($parameter);
+
+            break;
+
+        default:
+
+
+    }
+
+
+    
+    
 }catch(Exception $e) {
     Logger::log(__METHOD__ . " error migracion: " . $e->getMessage());
 }    

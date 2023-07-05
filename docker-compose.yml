@@ -17,6 +17,9 @@ services:
       READER_PASSWORD: reader
       UPDATER_USER: updater
       UPDATER_PASSWORD: updater
+    tty: true
+    
+
 
   mysql_db:
     image: mysql:latest

@@ -3,6 +3,7 @@ WORKDIR /var/www/html
 
 RUN apt-get update -y && apt-get install -y libmariadb-dev tree
 RUN docker-php-ext-install mysqli
+RUN a2enmod rewrite
 
 COPY . /var/www/html
 

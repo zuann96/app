@@ -106,13 +106,9 @@ class Purchases {
                 if ($affectedRows > 0) {
                     $purchase->id = $stmt->insert_id;
                     return true;
-                } else {
-                    echo "<pre>";
-                    var_dump($purchase);
-                    exit();
-
-                    throw new Exception(__METHOD__ . " No se pudo insertar la compra.");
-                }
+                } else throw new Exception(__METHOD__ . " No se pudo insertar la compra.");
+                    
+                
 
             } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);                
            

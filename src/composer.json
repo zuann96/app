@@ -1,0 +1,9 @@
+{
+  "name": "vendor/app",
+  "description": "Circular lab",
+  "type": "project",
+  "license": "MIT",
+  "require": {
+    "twbs/bootstrap": "^5.1"
+  }
+}

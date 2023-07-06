@@ -19,8 +19,6 @@ services:
       UPDATER_PASSWORD: updater
     tty: true
     
-
-
   mysql_db:
     image: mysql:latest
     command: --default-authentication-plugin=mysql_native_password

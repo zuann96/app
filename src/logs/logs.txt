@@ -1,0 +1,24 @@
+[2023-07-06 01:05:09] Intento 1 / 10 
+[2023-07-06 01:05:14] Intento 2 / 10 
+[2023-07-06 01:05:19] Intento 3 / 10 
+[2023-07-06 01:05:24] Intento 4 / 10 
+[2023-07-06 01:05:29] Intento 5 / 10 
+[2023-07-06 01:05:29] Iniciando migración...
+[2023-07-06 01:09:16] Migración completada. Tiempo total: 227.06304907799 segundos / insertados 14080 
+[2023-07-06 01:11:21] Intento 1 / 10 
+[2023-07-06 01:11:21] Migracion completada anteriormente..
+[2023-07-06 20:48:44] Intento 1 / 10 
+[2023-07-06 20:48:44] Migracion completada anteriormente..
+[2023-07-06 20:48:54] Intento 1 / 10 
+[2023-07-06 20:58:12] Intento 1 / 10 
+[2023-07-06 20:58:17] Intento 2 / 10 
+[2023-07-06 20:58:22] Intento 3 / 10 
+[2023-07-06 20:58:27] Intento 4 / 10 
+[2023-07-06 20:58:32] Intento 5 / 10 
+[2023-07-06 20:58:32] Migracion completada anteriormente..
+[2023-07-06 21:01:29] Intento 1 / 10 
+[2023-07-06 21:01:34] Intento 2 / 10 
+[2023-07-06 21:01:39] Intento 3 / 10 
+[2023-07-06 21:01:44] Intento 4 / 10 
+[2023-07-06 21:01:49] Intento 5 / 10 
+[2023-07-06 21:01:49] Migracion completada anteriormente..

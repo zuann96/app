@@ -1,9 +1,5 @@
 <?php
-
-include "Router.php"; // Incluir el enrutador
-// include "public" . DIRECTORY_SEPARATOR. "controllers" . DIRECTORY_SEPARATOR. "HomeController.php";
-// include "public" . DIRECTORY_SEPARATOR. "controllers" . DIRECTORY_SEPARATOR. "SalesController.php";
-
+require_once("Router.php");
 
 // Crear una instancia del enrutador
 $router = new Router();

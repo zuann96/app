@@ -1,47 +1,10 @@
-[2023-07-06 01:05:09] Intento 1 / 10 
-[2023-07-06 01:05:14] Intento 2 / 10 
-[2023-07-06 01:05:19] Intento 3 / 10 
-[2023-07-06 01:05:24] Intento 4 / 10 
-[2023-07-06 01:05:29] Intento 5 / 10 
-[2023-07-06 01:05:29] Iniciando migración...
-[2023-07-06 01:09:16] Migración completada. Tiempo total: 227.06304907799 segundos / insertados 14080 
-[2023-07-06 01:11:21] Intento 1 / 10 
-[2023-07-06 01:11:21] Migracion completada anteriormente..
-[2023-07-06 20:48:44] Intento 1 / 10 
-[2023-07-06 20:48:44] Migracion completada anteriormente..
-[2023-07-06 20:48:54] Intento 1 / 10 
-[2023-07-06 20:58:12] Intento 1 / 10 
-[2023-07-06 20:58:17] Intento 2 / 10 
-[2023-07-06 20:58:22] Intento 3 / 10 
-[2023-07-06 20:58:27] Intento 4 / 10 
-[2023-07-06 20:58:32] Intento 5 / 10 
-[2023-07-06 20:58:32] Migracion completada anteriormente..
-[2023-07-06 21:01:29] Intento 1 / 10 
-[2023-07-06 21:01:34] Intento 2 / 10 
-[2023-07-06 21:01:39] Intento 3 / 10 
-[2023-07-06 21:01:44] Intento 4 / 10 
-[2023-07-06 21:01:49] Intento 5 / 10 
-[2023-07-06 21:01:49] Migracion completada anteriormente..
-[2023-07-06 22:15:22] Intento 1 / 10 
-[2023-07-06 22:15:22] Iniciando migración...
-[2023-07-06 22:17:13] Migración completada. Tiempo total: 110.42570495605 segundos / insertados 14080 
-[2023-07-06 23:51:29] Intento 1 / 10 
-[2023-07-06 23:51:34] Intento 2 / 10 
-[2023-07-06 23:51:39] Intento 3 / 10 
-[2023-07-06 23:51:44] Intento 4 / 10 
-[2023-07-06 23:51:49] Intento 5 / 10 
-[2023-07-06 23:51:49] Migracion completada anteriormente..
-[2023-07-06 23:58:20] Intento 1 / 10 
-[2023-07-06 23:58:25] Intento 2 / 10 
-[2023-07-06 23:58:30] Intento 3 / 10 
-[2023-07-06 23:58:35] Intento 4 / 10 
-[2023-07-06 23:58:40] Intento 5 / 10 
-[2023-07-06 23:58:40] Migracion completada anteriormente..
-[2023-07-07 00:07:30] Intento 1 / 10 
-[2023-07-07 00:07:30] Migracion completada anteriormente..
-[2023-07-07 00:12:43] Intento 1 / 10 
-[2023-07-07 00:12:48] Intento 2 / 10 
-[2023-07-07 00:12:53] Intento 3 / 10 
-[2023-07-07 00:12:58] Intento 4 / 10 
-[2023-07-07 00:13:03] Intento 5 / 10 
-[2023-07-07 00:13:03] Migracion completada anteriormente..
+[2023-07-08 12:21:23] Intento 1 / 10 
+[2023-07-08 12:21:23] Iniciando migración...
+[2023-07-08 12:23:09] Migración completada. Tiempo total: 106.63502812386 segundos / insertados 14080 
+[2023-07-08 14:54:38] Intento 1 / 10 
+[2023-07-08 14:54:43] Intento 2 / 10 
+[2023-07-08 14:54:43] Migracion completada anteriormente..
+[2023-07-08 15:14:32] Intento 1 / 10 
+[2023-07-08 15:14:37] Intento 2 / 10 
+[2023-07-08 15:14:37] Migracion completada anteriormente..
+[2023-07-08 16:52:30] models\Purchases::getPurchaseYears error en la consulta: Unknown column 'YEAR' in 'order clause'

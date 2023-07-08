@@ -1,8 +1,8 @@
 <?php
 
-require_once "public" . DIRECTORY_SEPARATOR. "controllers" . DIRECTORY_SEPARATOR. "HomeController.php";
-require_once "public" . DIRECTORY_SEPARATOR. "controllers" . DIRECTORY_SEPARATOR. "SalesController.php";
-// require_once "public" . DIRECTORY_SEPARATOR. "controllers" . DIRECTORY_SEPARATOR. "UploadController.php";
+require_once ("controllers/HomeController.php");
+require_once ("controllers/SalesController.php");
+
 
 class Router {
     private $routes = [];

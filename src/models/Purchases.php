@@ -2,8 +2,8 @@
 
 namespace models;
 
-require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
-require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
+require_once(__DIR__ . "/../database/DatabaseConfig.php");
+require_once(__DIR__ . "/../utils/Logger.php");
 
 use utils\Logger;
 use database\DatabaseConfig;
@@ -86,6 +86,36 @@ class Purchases {
     // Setter para Purchase Date
     public function setPurchaseDate($purchase_date) {
         $this->purchase_date = $purchase_date;
+    }
+
+    public static function getPurchaseYears(){
+        try {
+            $salesData = [];
+
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                    
+            if (!$conn->connect_errno) {
+                $query = "SELECT DISTINCT YEAR(PURCHASE_DATE) AS AÑO FROM app_db.PURCHASES ORDER BY AÑO DESC;";
+                $stmt = $conn->prepare($query);
+
+                if ($stmt !== false) {
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc())$salesData[] = $row["AÑO"];
+                    }else throw new Exception(__METHOD__ . "año no encontrado: ");                    
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);       
+            
+            return $salesData;
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        }
+
+
+        
     }
 
     public static function insertPurchase(Purchases $purchase) {

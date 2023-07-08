@@ -1,13 +1,12 @@
 <?php
 
-require_once "models" . DIRECTORY_SEPARATOR . "Patient.php";
-require_once "models" . DIRECTORY_SEPARATOR . "Medicine.php";
-require_once "models" . DIRECTORY_SEPARATOR . "Country.php";
-require_once "models" . DIRECTORY_SEPARATOR . "Price.php";
-require_once "models" . DIRECTORY_SEPARATOR . "Purchases.php";
-require_once "utils" . DIRECTORY_SEPARATOR . "Logger.php";
-require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
-
+require_once ("models/Patient.php");
+require_once ("models/Medicine.php");
+require_once ("models/Country.php");
+require_once ("models/Price.php");
+require_once ("models/Purchases.php");
+require_once ("utils/Logger.php");
+require_once ("database/DatabaseConfig.php");
 
 use models\Patient;
 use models\Medicine;

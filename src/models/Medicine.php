@@ -2,8 +2,8 @@
 
 namespace models;
 
-require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
-require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
+require_once(__DIR__ . "/../database/DatabaseConfig.php");
+require_once(__DIR__ . "/../utils/Logger.php");
 
 use utils\Logger;
 use database\DatabaseConfig;
@@ -39,6 +39,42 @@ class Medicine {
     public function setName(string $name) {
         $this->name = $name;
     }
+
+    public static function getSalesByYear(int $year){
+        try {
+            $salesData = [];
+
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                    
+            if (!$conn->connect_errno) {
+                $query = "SELECT M.NAME AS MEDICINE, SUM(P.QUANTITY) AS SOLDS, YEAR(P.PURCHASE_DATE) AS YEAR
+                FROM app_db.PURCHASES P
+                INNER JOIN app_db.MEDICINES M ON M.ID = P.MEDICINE_ID
+                WHERE YEAR(P.PURCHASE_DATE) = ?
+                GROUP BY MEDICINE_ID, YEAR(PURCHASE_DATE)  
+                ORDER BY `SOLDS` DESC";
+                $stmt = $conn->prepare($query);
+
+                if ($stmt !== false) {
+                    $stmt->bind_param("i", $year);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) $salesData[] = $row;
+                    }else throw new Exception(__METHOD__ . "medicine no encontrado: ");                    
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);       
+            
+            return $salesData;
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        }
+
+
+    }
+    
     
     public static function isMedicineExistsByName(string $medicineName): bool {
         try {

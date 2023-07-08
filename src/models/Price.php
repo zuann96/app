@@ -2,10 +2,8 @@
 
 namespace models;
 
-require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
-require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
-
-
+require_once(__DIR__ . "/../database/DatabaseConfig.php");
+require_once(__DIR__ . "/../utils/Logger.php");
 
 use utils\Logger;
 use database\DatabaseConfig;
@@ -78,6 +76,46 @@ class Price {
     // Setter para Price
     public function setPrice(float $price) {
         $this->price = $price;
+    }
+
+    public static function getPriceAverageEvolutionByCountry($country_id = 0){
+        try {
+            $priceAverageData = [];
+            $bind_param = false;
+            $where = "";
+
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                             
+            if($country_id != 0){
+                $where = " WHERE COUNTRY_ID = ? ";
+                $bind_param = true;
+            }
+
+            if (!$conn->connect_errno) {
+                $query = "SELECT P.YEAR, C.NAME, ROUND(AVG(P.PRICE),2) AS AVERAGE_PRICE FROM app_db.PRICES P                
+                INNER JOIN app_db.COUNTRIES C ON C.ID = P.COUNTRY_ID                 
+                {$where}
+                GROUP BY P.YEAR, P.COUNTRY_ID  
+                ORDER BY P.COUNTRY_ID ASC";
+                $stmt = $conn->prepare($query);
+
+                if ($stmt !== false) {
+                    if($bind_param)$stmt->bind_param("i", $year);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) $priceAverageData[] = $row;
+                    }else throw new Exception(__METHOD__ . "medicine no encontrado: ");                    
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);       
+            
+            return $priceAverageData;
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        }
+
     }
 
     public static function isPriceExists(int $country_id, int $year, int $medicine_id): bool {

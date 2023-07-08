@@ -7,13 +7,16 @@
 <? require_once("components/head.php");?>
 <body>
 
-<? require_once("components/header.php");?>
-
-<? require_once("components/nav.php");?>
+  <? require_once("components/header.php");?>
+  <? require_once("components/nav.php");?>
 
   <? require_once("components/medicineSalesByYear.php");?>
- 
+  <? require_once("components/priceEvolutionPrice.php");?>
+
+
+  <br>
   <script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
-<? require_once("components/footer.php"); ?>
+
 </html>

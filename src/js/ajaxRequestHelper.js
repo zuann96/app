@@ -1,4 +1,5 @@
 function ajaxRequest(url, method, data, successCallback, errorCallback) {
+
     var xhr = new XMLHttpRequest();
     xhr.open(method, url, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -18,5 +19,7 @@ function ajaxRequest(url, method, data, successCallback, errorCallback) {
     };
   
     xhr.send(data);
+   
+
   }
   

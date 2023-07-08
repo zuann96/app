@@ -1,4 +1,9 @@
-<footer class="bg-dark text-light text-center py-3" style="position: fixed; bottom: 0; width: 100%;">
-    <p>&copy; 2023 Joan Marti. All rights reserved.</p>
-    <script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<footer class="fixed-bottom bg-dark text-light text-center py-3">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p>&copy; 2023 Joan Marti. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
 </footer>

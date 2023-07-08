@@ -1,8 +1,8 @@
 <?php
 namespace models;
 
-require_once "database" . DIRECTORY_SEPARATOR. "DatabaseConfig.php";
-require_once "utils" . DIRECTORY_SEPARATOR. "Logger.php";
+require_once(__DIR__ . "/../database/DatabaseConfig.php");
+require_once(__DIR__ . "/../utils/Logger.php");
 
 use utils\Logger;
 use database\DatabaseConfig;

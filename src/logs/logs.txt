@@ -8,3 +8,16 @@
 [2023-07-08 15:14:37] Intento 2 / 10 
 [2023-07-08 15:14:37] Migracion completada anteriormente..
 [2023-07-08 16:52:30] models\Purchases::getPurchaseYears error en la consulta: Unknown column 'YEAR' in 'order clause'
+[2023-07-08 19:24:44] models\Price::getPriceAverageEvolutionByCountry error en la consulta: Table 'app_db.COUNTRY' doesn't exist
+[2023-07-08 19:26:02] models\Price::getPriceAverageEvolutionByCountry error en la consulta: Unknown column 'C.COUNTRY_NAME' in 'field list'
+[2023-07-08 19:26:15] models\Price::getPriceAverageEvolutionByCountry error en la consulta: Unknown column 'C.COUNTRY_NAME' in 'field list'
+[2023-07-08 19:26:31] models\Price::getPriceAverageEvolutionByCountry error en la consulta: Unknown column 'C.COUNTRY_NAME' in 'field list'
+[2023-07-08 19:26:44] models\Price::getPriceAverageEvolutionByCountry error en la consulta: Unknown column 'PRICES.COUNTRY_ID' in 'order clause'
+[2023-07-08 20:26:26] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:27:34] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:28:12] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:28:30] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:30:07] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:30:13] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:30:27] models\Country::getCountryByName pais no encontrado: 
+[2023-07-08 20:31:29] models\Country::getCountryByName pais no encontrado: 

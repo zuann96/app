@@ -88,6 +88,12 @@ class Purchases {
         $this->purchase_date = $purchase_date;
     }
 
+    /**
+     * Obtener los años de compras
+     *
+     * @return 
+     * 
+     */
     public static function getPurchaseYears(){
         try {
             $salesData = [];
@@ -118,6 +124,14 @@ class Purchases {
         
     }
 
+    /**
+     * Insertar compra
+     *
+     * @param Purchases $purchase
+     * 
+     * @return 
+     * 
+     */
     public static function insertPurchase(Purchases $purchase) {
         try {
            
@@ -148,6 +162,14 @@ class Purchases {
         }
     }
 
+    /**
+     * Actualizar compra
+     *
+     * @param Purchases $purchase
+     * 
+     * @return
+     * 
+     */
     public static function updatePurchase(Purchases $purchase) {
         try {
         
@@ -172,6 +194,14 @@ class Purchases {
         }
     }
 
+    /**
+     * Eliminar compra
+     *
+     * @param Purchases $purchase
+     * 
+     * @return 
+     * 
+     */
     public static function deletePurchase(Purchases $purchase) {
         try {
         

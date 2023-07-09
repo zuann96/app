@@ -78,6 +78,14 @@ class Price {
         $this->price = $price;
     }
 
+    /**
+     * obtencion de estimacion de precio por pais id
+     *
+     * @param int $country_id
+     * 
+     * @return 
+     * 
+     */
     public static function getPriceAverageEvolutionByCountry($country_id = 0){
         try {
             $priceAverageData = [];
@@ -118,6 +126,16 @@ class Price {
 
     }
 
+    /**
+     * Comprovacion de si existe el precio
+     *
+     * @param int $country_id
+     * @param int $year
+     * @param int $medicine_id
+     * 
+     * @return bool
+     * 
+     */
     public static function isPriceExists(int $country_id, int $year, int $medicine_id): bool {
         try {
         
@@ -144,6 +162,14 @@ class Price {
         }
     }
 
+    /**
+     * Obtencion de precio por id
+     *
+     * @param int $priceId
+     * 
+     * @return 
+     * 
+     */
     public static function getPriceById(int $priceId) {
         try {
 
@@ -172,6 +198,14 @@ class Price {
         }
     }
 
+    /**
+     * Insercion de precio
+     *
+     * @param Price $price
+     * 
+     * @return 
+     * 
+     */
     public static function insertPrice(Price $price) {
         try {
         
@@ -201,6 +235,14 @@ class Price {
         }
     }
 
+    /**
+     * Actualizacion del precio
+     *
+     * @param Price $price
+     * 
+     * @return 
+     * 
+     */
     public static function updatePrice(Price $price) {
         try {
            
@@ -225,6 +267,14 @@ class Price {
         }
     }
 
+    /**
+     * Eliminar precio
+     *
+     * @param Price $price
+     * 
+     * @return
+     * 
+     */
     public static function deletePrice(Price $price) {
         try {
 

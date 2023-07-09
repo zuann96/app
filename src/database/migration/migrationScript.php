@@ -2,10 +2,11 @@
 
 
 require_once ("migrationResources.php");
+require_once("database/DatabaseConfig.php");
+require_once("utils/Logger.php");
 
-
-
-
+use database\DatabaseConfig;
+use utils\Logger;
 
 
 try{

@@ -15,8 +15,6 @@ class HomeController
 
     }
 
-    // Otros métodos del controlador para manejar otras páginas y acciones
-    // ...
 }
 
 

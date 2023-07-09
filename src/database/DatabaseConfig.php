@@ -11,6 +11,12 @@ class DatabaseConfig {
 
 
 
+    /**
+     * Connexión SOLO LECTURA
+     *
+     * @return void
+     * 
+     */
     public static function getResourcesReader() {
         $host = getenv("MYSQL_HOST");
         $username = getenv("READER_USER");
@@ -30,6 +36,12 @@ class DatabaseConfig {
 
     }
     
+    /**
+     * Connexión solo escritura, actualización
+     *
+     * @return void
+     * 
+     */
     public static function getResourcesUpdater() {
     
         $host = getenv("MYSQL_HOST");

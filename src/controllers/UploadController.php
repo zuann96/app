@@ -31,7 +31,6 @@ class UploadController
 
 }
 
-// Crear una instancia del controlador
 $controller = new UploadController();
 
 // Verificar si se ha enviado un archivo y si no hay errores

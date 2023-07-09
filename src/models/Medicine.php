@@ -40,6 +40,14 @@ class Medicine {
         $this->name = $name;
     }
 
+    /**
+     * Obtencion de todas las ventas por año
+     *
+     * @param int $year
+     * 
+     * @return mixed
+     * 
+     */
     public static function getSalesByYear(int $year){
         try {
             $salesData = [];
@@ -76,6 +84,14 @@ class Medicine {
     }
     
     
+    /**
+     * Comprovar existencia de la medicina por nombre
+     *
+     * @param string $medicineName
+     * 
+     * @return bool
+     * 
+     */
     public static function isMedicineExistsByName(string $medicineName): bool {
         try {
         
@@ -103,6 +119,14 @@ class Medicine {
         }
     }
     
+    /**
+     * Obtencion de la medicine por id
+     *
+     * @param int $medicineId
+     * 
+     * @return mixed
+     * 
+     */
     public static function getMedicineById(int $medicineId) {        
         try {
 
@@ -132,6 +156,14 @@ class Medicine {
         }
     }
 
+    /**
+     * Obtención de la medicine por nombre
+     *
+     * @param string $name
+     * 
+     * @return mixed
+     * 
+     */
     public static function getMedicineByName(string $name) {
         try {
             $conn = DatabaseConfig::getResourcesReader();
@@ -160,6 +192,14 @@ class Medicine {
         }
     }
     
+    /**
+     * inserción de medicina
+     *
+     * @param Medicine $medicine
+     * 
+     * @return mixed
+     * 
+     */
     public static function insertMedicine(Medicine $medicine){   
         try {
         

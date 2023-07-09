@@ -40,6 +40,12 @@ class Country {
         $this->name = $name;
     }
 
+    /**
+     * Obtencion de todos los paises disponibles
+     *
+     * @return void
+     * 
+     */
     public static function getAllCountries(){
         try {
             $countryData = [];
@@ -67,6 +73,14 @@ class Country {
 
     }
 
+    /**
+     * Comprovación existencia de pais por nombre
+     *
+     * @param string $countryName
+     * 
+     * @return bool
+     * 
+     */
     public static function isCountryExistsByName(string $countryName): bool {
         try {
             
@@ -92,6 +106,14 @@ class Country {
         } 
     }
     
+    /**
+     * Obtener pais por id
+     *
+     * @param int $countryId
+     * 
+     * @return Country
+     * 
+     */
     public static function getCountryById(int $countryId) {        
         try{
             
@@ -118,6 +140,14 @@ class Country {
         } 
     }
 
+    /**
+     * Obtencion de pais por nombre
+     *
+     * @param string $name
+     * 
+     * @return Country
+     * 
+     */
     public static function getCountryByName(string $name) {
         try {
         
@@ -145,6 +175,14 @@ class Country {
         } 
     }
 
+    /**
+     * inserción de pais
+     *
+     * @param Country $country
+     * 
+     * @return bool
+     * 
+     */
     public static function insertCountry(Country $country){   
         try {
 

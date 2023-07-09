@@ -4,7 +4,8 @@ namespace controllers;
 
 use models\Medicine;
 
-class ApiController
+
+class GraphController
 {
     public function isMedicineExistsByName($request)
     {
@@ -28,6 +29,6 @@ class ApiController
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $requestData = json_decode(file_get_contents('php://input'), true);
 
-    $controller = new ApiController();
+    $controller = new GraphController();
     $controller->isMedicineExistsByName($requestData);
 }

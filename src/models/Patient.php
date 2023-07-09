@@ -41,6 +41,14 @@ class Patient {
     }
     
 
+    /**
+     * comprovacion de existencia de paciente por codigo
+     *
+     * @param string $code
+     * 
+     * @return bool
+     * 
+     */
     public static function isPatientExistsByCode(string $code): bool {
         try {   
 
@@ -66,6 +74,14 @@ class Patient {
         }
     }
 
+    /**
+     * obtención de paciente por id
+     *
+     * @param int $patientId
+     * 
+     * @return 
+     * 
+     */
     public static function getPatientById(int $patientId) {        
         try {
             $conn = DatabaseConfig::getResourcesReader();
@@ -93,16 +109,20 @@ class Patient {
         }    
     }
 
+    /**
+     * obtención de paciente por codigo
+     *
+     * @param string $patientCode
+     * 
+     * @return 
+     * 
+     */
     public static function getPatientByCode(string $patientCode) {
         try {
-            
-                $conn = DatabaseConfig::getResourcesReader();
-                if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
-                    
-                
-            
-    
-           
+        
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                           
             $query = "SELECT * FROM app_db.PATIENTS WHERE CODE = ? LIMIT 1";
             $stmt = $conn->prepare($query);
 
@@ -124,6 +144,14 @@ class Patient {
         } 
     }
     
+    /**
+     *  Inserción de paciente
+     *
+     * @param Patient $patient
+     * 
+     * @return
+     * 
+     */
     public static function insertPatient(Patient $patient){   
         try {
 

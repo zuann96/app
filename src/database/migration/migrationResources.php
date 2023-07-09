@@ -16,6 +16,16 @@ use utils\Logger;
 use database\DatabaseConfig;
 
 
+/**
+ * Convierte csv a array
+ *
+ * @param string $filePath directorio fitxero
+ * @param string $delimiter separador de valores
+ * @param mixed '
+ * 
+ * @return array
+ * 
+ */
 function csvToArray(string $filePath, string $delimiter = ','): array
 {
     $data = [];
@@ -36,6 +46,12 @@ function csvToArray(string $filePath, string $delimiter = ','): array
 }
 
 
+/**
+ * Crea un fitxero de control de migracion
+ *
+ * @return void
+ * 
+ */
 function createMigrationOkFile() {
     $filename = 'migration_ok';
 
@@ -46,6 +62,12 @@ function createMigrationOkFile() {
     } 
 }
 
+/**
+ * Comprueva si existe el fitxero de migracion
+ *
+ * @return void
+ * 
+ */
 function checkMigrationOkFile() {
     $filename = 'migration_ok';
 
@@ -54,15 +76,24 @@ function checkMigrationOkFile() {
     
 }
 
-
+/**
+ * Convierte csv a array
+ *
+ * @param string $parameter parametro 
+ * @param array $filePaths array de direccion de fitxeros
+ * @param string $delimiter separador de valores
+ * 
+ * @return array
+ * 
+ */
 function migrationScript($parameter = "", $filePaths = [], $delimiter = ";"){
-
 
     Logger::log("Iniciando migración...");    
     $startTime = microtime(true);
 
     $insertCounter = 0;
     foreach($filePaths as $fileName=>$filePath){
+        if(is_array($filePath))$filePath = $filePath[0];
         $purchaseData = csvToArray($filePath, $delimiter);
         $header = $purchaseData["header"];
         $data =  $purchaseData["data"];

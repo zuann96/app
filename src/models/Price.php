@@ -101,12 +101,12 @@ class Price {
                 $stmt = $conn->prepare($query);
 
                 if ($stmt !== false) {
-                    if($bind_param)$stmt->bind_param("i", $year);
+                    if($bind_param)$stmt->bind_param("i", $country_id);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     if ($result->num_rows > 0) {
                         while($row = $result->fetch_assoc()) $priceAverageData[] = $row;
-                    }else throw new Exception(__METHOD__ . "medicine no encontrado: ");                    
+                    }else throw new Exception(__METHOD__ . "price no encontrado: ");                    
                 } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
             } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);       
             

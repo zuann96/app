@@ -24,21 +24,16 @@ function priceEvolutionPriceChart(country, selectedType = "line") {
     data = "action=ajaxgetPriceAverageEvolutionByCountry";
   }
 
-  console.log(data);
   ajaxRequest(url, method, data, function(response) {
     try {
-      console.log(response);
-      let priceEvolutionData = JSON.parse(response);
-
+        let priceEvolutionData = JSON.parse(response);
       
-      priceEvolutionData.forEach(function(item) {
+        priceEvolutionData.forEach(function(item) {
         if(!labels.includes(item.YEAR))labels.push(item.YEAR);
         
         // Obtener el país del objeto de datos
         let country = item.NAME;
         colors.push(generateRandomColor());
-        
-
 
         // Verificar si el país ya existe en los datasets
         let existingDataset = datasets.find(dataset => dataset.label === country);
@@ -58,8 +53,6 @@ function priceEvolutionPriceChart(country, selectedType = "line") {
           datasets.push(dataset);
         }
       });
-
-      console.log(colors);
 
       let chartData = {
         type: selectedType,
@@ -86,7 +79,7 @@ function priceEvolutionPriceChart(country, selectedType = "line") {
       }
 
     } catch (error) {
-      console.error(error);
+      console.error(error, response);
     }
   }, function(errorStatus) {
     console.error("Error al obtener los datos de evolución de precios:", errorStatus);
@@ -127,7 +120,7 @@ function medicineSalesByYearChart(year = null, selectedColor = "rgba(0, 128, 0, 
           data: {
             labels: labels,
             datasets: [{
-              label: 'Sales',
+              label: "Sales",
               data: sales,
               backgroundColor: selectedColor,
               borderColor: 'rgba(75, 192, 192, 1)',
@@ -185,12 +178,15 @@ document.addEventListener('DOMContentLoaded', function() {
   let typeSelect = document.getElementById("typeFilterSales");
   let typeSelect2 = document.getElementById("typeFilterPrice");
 
+  //country
+  let countrySelect = document.getElementById("countryFilterPrice");
+
   applyFiltersBtn.addEventListener('click', function() {
     medicineSalesByYearChart(yearSelect.value, colorSelect.value, typeSelect.value);
   });
 
   applyFiltersBtn2.addEventListener('click', function() {
-    priceEvolutionPriceChart(yearSelect.value, typeSelect2.value);
+    priceEvolutionPriceChart(countrySelect.value, typeSelect2.value);
   });
 
 });

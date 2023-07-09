@@ -1,5 +1,3 @@
-<? $context = compact(array_keys(get_defined_vars())); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <script src="js/salesController.js"></script>

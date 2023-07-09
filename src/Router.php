@@ -2,6 +2,7 @@
 
 require_once ("controllers/HomeController.php");
 require_once ("controllers/SalesController.php");
+require_once ("controllers/UploadController.php");
 
 
 class Router {
@@ -9,13 +10,12 @@ class Router {
 
     public function addRoute($route, $handler) {
         $this->routes[$route] = $handler;
-       
     }
 
     public function dispatch($requestedRoute) {
 
         $route = strtok($requestedRoute, "?");
-
+       
         if (array_key_exists($route, $this->routes)) {
             $handler = $this->routes[$route];
             $handlerParts = explode("@", $handler);
@@ -32,8 +32,8 @@ class Router {
             }
         }
 
-        // Ruta no encontrada
-        echo "404 - Not Found";
+        // // Ruta no encontrada
+        // echo "404 - Not Found";
     }
 }
 

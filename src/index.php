@@ -15,7 +15,4 @@ $requestUri = $_SERVER["REQUEST_URI"];
 // Ejecutar el enrutador
 $router->dispatch($requestUri);
 
-
-
-
 ?>

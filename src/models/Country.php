@@ -40,6 +40,33 @@ class Country {
         $this->name = $name;
     }
 
+    public static function getAllCountries(){
+        try {
+            $countryData = [];
+
+            $conn = DatabaseConfig::getResourcesReader();
+            if ($conn->connect_errno) throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);
+                    
+            if (!$conn->connect_errno) {
+                $query = "SELECT * FROM app_db.COUNTRIES ORDER BY COUNTRIES.ID ASC";                
+                $stmt = $conn->prepare($query);
+                if ($stmt !== false) {
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    if ($result->num_rows > 0) {
+                        while($row = $result->fetch_assoc()) $countryData[] = $row;
+                    }else throw new Exception(__METHOD__ . "paises no encontrados: ");                    
+                } else throw new Exception(__METHOD__ . " error en la consulta: " . $conn->error);
+            } else throw new Exception(__METHOD__ . " error de conexión a la base de datos: " . $conn->connect_error);       
+            
+            return $countryData;
+        } catch (Exception $e) {
+            Logger::log($e->getMessage());
+            return false;
+        }
+
+    }
+
     public static function isCountryExistsByName(string $countryName): bool {
         try {
             

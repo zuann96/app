@@ -8,7 +8,11 @@
                 <div class="mb-3">
                   <label for="yearFilter" class="form-label">Country:</label>
                   <select class="form-select" id="countryFilterPrice">
-                    
+                    <?php foreach ($availableCountries as $index => $country) : ?>
+                      <option value="<?= $index === 0 ? '0' : $country['ID'] ?>">
+                        <?= $index === 0 ? 'All' : $country['NAME'] ?>
+                      </option>
+                    <?php endforeach; ?>
                   </select>                  
                 </div>
 
@@ -16,7 +20,7 @@
                   <label for="typeFilterSales" class="form-label">Type:</label>
                   <select class="form-select" id="typeFilterPrice">
                     <option value="bar">Bar</option>
-                    <option value="line">Line</option>
+                    <option value="line" selected>Line</option>
                   </select>
                 </div>
 

@@ -20,18 +20,9 @@ class SalesController
         echo json_encode($salesByYear);
     }
 
-    public function ajaxgetPriceAverageEvolutionByCountry(String $countryName = ""){
-
-        var_dump($countryName);
-        if($countryName != ""){
-            $country = Country::getCountryByName($countryName);
-            var_dump($country);
-            $country_id = $country->getId();
-        }else $country_id = 0;
-
-        $priceAverage = Price::getPriceAverageEvolutionByCountry($country_id);
+    public function ajaxgetPriceAverageEvolutionByCountry(int $countryId = 0){
+        $priceAverage = Price::getPriceAverageEvolutionByCountry($countryId);
         echo json_Encode($priceAverage);
-
     }
 
     // Método para mostrar la página de inicio
@@ -39,10 +30,11 @@ class SalesController
     
         // Lógica adicional para preparar los datos necesarios para la vista
         $title = $pageTitle = "Sales graphics";
-        $currentPage = "sales";       
+        $currentPage = "sales";
+        $availableCountries = [];       
     
         $availableYears = Purchases::getPurchaseYears();
-
+        $availableCountries = Country::getAllCountries();
 
         // Incluir la vista
         require_once "views/sales.php";
@@ -70,9 +62,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"])) {
 
         
         case 'ajaxgetPriceAverageEvolutionByCountry':
-            $countryName = "";
-            if (isset($_POST["country"]) && !empty($_POST["country"]))$countryName = strval($_POST["country"]);                            
-            $controller->ajaxgetPriceAverageEvolutionByCountry($countryName);
+            $countrId = 0;
+            if (isset($_POST["country"]) && !empty($_POST["country"]))$countrId = intval($_POST["country"]);                            
+            $controller->ajaxgetPriceAverageEvolutionByCountry($countrId);
             break;
               
 

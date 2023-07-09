@@ -1,2 +1,5 @@
-# app
- tech test
+APP
+Sales graphic app
+
+INSTALL
+Execute install.ps1
